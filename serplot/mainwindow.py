@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Mon Dec 15 23:58:51 2014
+# Created: Tue Dec 16 01:42:24 2014
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -70,6 +70,7 @@ class Ui_MainWindow(object):
         self.w_filter_sma.setObjectName(_fromUtf8("w_filter_sma"))
         self.horizontalLayout.addWidget(self.w_filter_sma)
         self.w_filter_window = QtGui.QSpinBox(self.w_box_filtering)
+        self.w_filter_window.setEnabled(False)
         self.w_filter_window.setSuffix(_fromUtf8(""))
         self.w_filter_window.setMinimum(1)
         self.w_filter_window.setObjectName(_fromUtf8("w_filter_window"))

@@ -87,6 +87,9 @@
        </item>
        <item>
         <widget class="QSpinBox" name="w_filter_window">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="suffix">
           <string/>
          </property>
