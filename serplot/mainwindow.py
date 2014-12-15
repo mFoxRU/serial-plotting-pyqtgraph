@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Fri Dec 12 10:28:25 2014
-#      by: PyQt4 UI code generator 4.10.4
+# Created: Mon Dec 15 23:58:51 2014
+#      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -67,12 +67,8 @@ class Ui_MainWindow(object):
         self.w_filter_none.setObjectName(_fromUtf8("w_filter_none"))
         self.horizontalLayout.addWidget(self.w_filter_none)
         self.w_filter_sma = QtGui.QRadioButton(self.w_box_filtering)
-        self.w_filter_sma.setChecked(False)
         self.w_filter_sma.setObjectName(_fromUtf8("w_filter_sma"))
         self.horizontalLayout.addWidget(self.w_filter_sma)
-        self.w_filter_cma = QtGui.QRadioButton(self.w_box_filtering)
-        self.w_filter_cma.setObjectName(_fromUtf8("w_filter_cma"))
-        self.horizontalLayout.addWidget(self.w_filter_cma)
         self.w_filter_window = QtGui.QSpinBox(self.w_box_filtering)
         self.w_filter_window.setSuffix(_fromUtf8(""))
         self.w_filter_window.setMinimum(1)
@@ -81,16 +77,10 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.w_box_filtering, 0, 1, 1, 1)
         spacerItem = QtGui.QSpacerItem(513, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 0, 2, 1, 1)
-        self.w_plotholder = QtGui.QFrame(self.centralwidget)
-        self.w_plotholder.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.w_plotholder.setFrameShadow(QtGui.QFrame.Raised)
-        self.w_plotholder.setObjectName(_fromUtf8("w_plotholder"))
-        self.gridLayout.addWidget(self.w_plotholder, 1, 0, 1, 3)
+        self.w_box_plot = QtGui.QGroupBox(self.centralwidget)
+        self.w_box_plot.setObjectName(_fromUtf8("w_box_plot"))
+        self.gridLayout.addWidget(self.w_box_plot, 1, 0, 1, 3)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1024, 21))
-        self.menubar.setObjectName(_fromUtf8("menubar"))
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
@@ -106,16 +96,6 @@ class Ui_MainWindow(object):
         self.w_box_filtering.setTitle(_translate("MainWindow", "Filtering", None))
         self.w_filter_none.setText(_translate("MainWindow", "None", None))
         self.w_filter_sma.setText(_translate("MainWindow", "SMA", None))
-        self.w_filter_cma.setText(_translate("MainWindow", "CMA", None))
         self.w_filter_window.setPrefix(_translate("MainWindow", "n=", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    MainWindow = QtGui.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+        self.w_box_plot.setTitle(_translate("MainWindow", "GroupBox", None))
 

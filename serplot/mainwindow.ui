@@ -83,16 +83,6 @@
          <property name="text">
           <string>SMA</string>
          </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="w_filter_cma">
-         <property name="text">
-          <string>CMA</string>
-         </property>
         </widget>
        </item>
        <item>
@@ -125,26 +115,13 @@
      </spacer>
     </item>
     <item row="1" column="0" colspan="3">
-     <widget class="QFrame" name="w_plotholder">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+     <widget class="QGroupBox" name="w_box_plot">
+      <property name="title">
+       <string>GroupBox</string>
       </property>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1024</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
