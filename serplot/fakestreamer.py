@@ -8,8 +8,8 @@ from abstractstreamer import AbstractStreamer
 
 
 class FakeStreamer(AbstractStreamer):
-    def __init__(self, channels=6, lim=600, delay=.1,
-                 fn=lambda x: 128 * (1 + math.sin(x * 0.1)), *args, **kwargs):
+    def __init__(self, channels=6, lim=600, delay=.01,
+                 fn=lambda x: 128 * (1 + math.sin(x * 0.05)), *args, **kwargs):
         AbstractStreamer.__init__(self, channels, lim)
         self._fn = fn
         self._delay = delay

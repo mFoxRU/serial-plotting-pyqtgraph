@@ -47,6 +47,10 @@ class AbstractStreamer(object):
         with self._locker:
             return [d.data for d in self._data]
 
+    def sma(self, n):
+        with self._locker:
+            return [d.sma(n) for d in self._data]
+
     def add_data(self, data):
         with self._locker:
             for n, d in enumerate(data):
