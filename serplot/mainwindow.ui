@@ -120,7 +120,7 @@
     <item row="1" column="0" colspan="3">
      <widget class="QGroupBox" name="w_box_plot">
       <property name="title">
-       <string>GroupBox</string>
+       <string/>
       </property>
      </widget>
     </item>

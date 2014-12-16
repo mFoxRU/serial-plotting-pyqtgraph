@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Tue Dec 16 01:42:24 2014
+# Created: Tue Dec 16 02:49:49 2014
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -79,6 +79,7 @@ class Ui_MainWindow(object):
         spacerItem = QtGui.QSpacerItem(513, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 0, 2, 1, 1)
         self.w_box_plot = QtGui.QGroupBox(self.centralwidget)
+        self.w_box_plot.setTitle(_fromUtf8(""))
         self.w_box_plot.setObjectName(_fromUtf8("w_box_plot"))
         self.gridLayout.addWidget(self.w_box_plot, 1, 0, 1, 3)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -98,5 +99,4 @@ class Ui_MainWindow(object):
         self.w_filter_none.setText(_translate("MainWindow", "None", None))
         self.w_filter_sma.setText(_translate("MainWindow", "SMA", None))
         self.w_filter_window.setPrefix(_translate("MainWindow", "n=", None))
-        self.w_box_plot.setTitle(_translate("MainWindow", "GroupBox", None))
 
