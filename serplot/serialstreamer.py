@@ -43,12 +43,12 @@ class SerialStreamer(AbstractStreamer):
             while len(raw) >= 4 + self._lim * 2:
                 if raw.startswith(self._start_bytes):
                     info_string = raw[4:4 + self._channels * 2]
-                    info_bytes = [info_string[x * 2: x * 2 + 2]
-                                  for x in xrange(self._channels)]
+                    info_bytes = [
+                        int(info_string[x * 2: x * 2 + 2], base=16)
+                        for x in xrange(self._channels)
+                    ]
                     info_bytes.reverse()
-                    with self._locker:
-                        for data, new in izip(self._data, info_bytes):
-                            data.add(int(new, base=16))
+                    self.add_data(info_bytes)
                     raw = raw[4 + self._channels * 2:]
                 else:
                     raw = raw[2:]

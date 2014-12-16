@@ -47,6 +47,11 @@ class AbstractStreamer(object):
         with self._locker:
             return [d.data for d in self._data]
 
+    def add_data(self, data):
+        with self._locker:
+            for n, d in enumerate(data):
+                self._data[n].add(d)
+
     def start(self):
         thread.start_new_thread(self._loop, ())
 
