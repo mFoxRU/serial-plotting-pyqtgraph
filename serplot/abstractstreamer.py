@@ -1,9 +1,12 @@
 __author__ = 'mFoxRU'
 
+import abc
+import thread
+
 import numpy as np
 
 
-class Data(object):
+class LimData(object):
     def __init__(self, lim, dtype=float):
         self.limit = lim
         self.counter = 0
@@ -30,4 +33,25 @@ class Data(object):
         w = np.repeat(1., n) / n
         sma = np.convolve(self._data[:self.counter], w, mode='valid')
         return sma
+
+
+class AbstractStreamer(object):
+    def __init__(self, channels=6, lim=600, *args, **kwargs):
+        self._lim = lim
+        self._channels = channels
+        self._data = [LimData(lim, dtype=int) for _ in xrange(channels)]
+        self._locker = thread.allocate_lock()
+
+    @property
+    def data(self):
+        with self._locker:
+            return [d.data for d in self._data]
+
+    def start(self):
+        thread.start_new_thread(self._loop, ())
+
+    @abc.abstractmethod
+    def _loop(self, *args, **kwargs):
+        pass
+
 
