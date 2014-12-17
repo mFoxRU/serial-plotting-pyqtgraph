@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Tue Dec 16 02:49:49 2014
+# Created: Wed Dec 17 20:57:18 2014
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -75,13 +75,25 @@ class Ui_MainWindow(object):
         self.w_filter_window.setMinimum(1)
         self.w_filter_window.setObjectName(_fromUtf8("w_filter_window"))
         self.horizontalLayout.addWidget(self.w_filter_window)
-        self.gridLayout.addWidget(self.w_box_filtering, 0, 1, 1, 1)
-        spacerItem = QtGui.QSpacerItem(513, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem, 0, 2, 1, 1)
+        self.gridLayout.addWidget(self.w_box_filtering, 0, 2, 1, 1)
         self.w_box_plot = QtGui.QGroupBox(self.centralwidget)
         self.w_box_plot.setTitle(_fromUtf8(""))
         self.w_box_plot.setObjectName(_fromUtf8("w_box_plot"))
-        self.gridLayout.addWidget(self.w_box_plot, 1, 0, 1, 3)
+        self.gridLayout.addWidget(self.w_box_plot, 1, 0, 1, 4)
+        self.w_box_plotting_control = QtGui.QGroupBox(self.centralwidget)
+        self.w_box_plotting_control.setEnabled(True)
+        self.w_box_plotting_control.setObjectName(_fromUtf8("w_box_plotting_control"))
+        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.w_box_plotting_control)
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.w_button_pause = QtGui.QPushButton(self.w_box_plotting_control)
+        self.w_button_pause.setEnabled(True)
+        self.w_button_pause.setCheckable(True)
+        self.w_button_pause.setAutoDefault(False)
+        self.w_button_pause.setObjectName(_fromUtf8("w_button_pause"))
+        self.horizontalLayout_2.addWidget(self.w_button_pause)
+        self.gridLayout.addWidget(self.w_box_plotting_control, 0, 1, 1, 1)
+        spacerItem = QtGui.QSpacerItem(513, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem, 0, 3, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -99,4 +111,6 @@ class Ui_MainWindow(object):
         self.w_filter_none.setText(_translate("MainWindow", "None", None))
         self.w_filter_sma.setText(_translate("MainWindow", "SMA", None))
         self.w_filter_window.setPrefix(_translate("MainWindow", "n=", None))
+        self.w_box_plotting_control.setTitle(_translate("MainWindow", "Plotting", None))
+        self.w_button_pause.setText(_translate("MainWindow", "Pause", None))
 

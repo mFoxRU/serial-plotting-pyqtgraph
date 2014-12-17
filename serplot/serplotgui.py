@@ -23,6 +23,7 @@ class GuiApp(QtGui.QMainWindow):
         self.timer = None
         self.stream = None
         self.filtering = False
+        self.ui.w_box_plotting_control.setEnabled(False)
         # Add sources
         self.ui.w_port.addItem('Emulate')
         for port in self._serial_ports():
@@ -30,6 +31,7 @@ class GuiApp(QtGui.QMainWindow):
         # Connects
         self.ui.w_connect.clicked.connect(self._try_to_connect)
         self.ui.w_filter_none.toggled.connect(self._no_filter)
+        self.ui.w_button_pause.toggled.connect(self._pause_button_pressed)
         # Mix
         self.plots = []
         # For special release
@@ -61,7 +63,19 @@ class GuiApp(QtGui.QMainWindow):
         self.filtering = not state
         self.ui.w_filter_window.setEnabled(not state)
 
+    @QtCore.pyqtSlot(bool)
+    def _pause_button_pressed(self, state):
+        if state:
+            self.ui.w_button_pause.setText('Resume')
+            if self.timer is not None:
+                self.timer.stop()
+        else:
+            self.ui.w_button_pause.setText('Pause')
+            if self.timer is not None:
+                self.timer.start()
+
     def _start(self, port):
+        self.ui.w_box_plotting_control.setEnabled(True)
         # Prepare for plots placing
         channels = self.ui.w_channels.value()
         matrix = (1, 3) if channels <= 3 else (2, 3)
@@ -131,4 +145,3 @@ def main(argv=None):
 
 if __name__ == '__main__':
     main()
-
