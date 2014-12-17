@@ -112,13 +112,19 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QGroupBox" name="v_box_stream_control">
+     <widget class="QGroupBox" name="w_box_plotting_control">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="title">
-       <string>Stream control</string>
+       <string>Plotting</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QPushButton" name="w_button_pause">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>Pause</string>
          </property>
