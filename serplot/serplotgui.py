@@ -30,6 +30,7 @@ class GuiApp(QtGui.QMainWindow):
         # Connects
         self.ui.w_connect.clicked.connect(self._try_to_connect)
         self.ui.w_filter_none.toggled.connect(self._no_filter)
+        self.ui.w_button_pause.toggled.connect(self._pause_button_pressed)
         # Mix
         self.plots = []
         # For special release
@@ -60,6 +61,17 @@ class GuiApp(QtGui.QMainWindow):
     def _no_filter(self, state):
         self.filtering = not state
         self.ui.w_filter_window.setEnabled(not state)
+
+    @QtCore.pyqtSlot(bool)
+    def _pause_button_pressed(self, state):
+        if state:
+            self.ui.w_button_pause.setText('Resume')
+            if self.timer is not None:
+                self.timer.stop()
+        else:
+            self.ui.w_button_pause.setText('Pause')
+            self.timer.start()
+
 
     def _start(self, port):
         # Prepare for plots placing
