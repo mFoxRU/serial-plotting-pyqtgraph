@@ -96,12 +96,15 @@ class GuiApp(QtGui.QMainWindow):
         # Create plots
         for ch, (y, x) in coordinates:
             widget = pg.PlotWidget(self, title='Channel {}'.format(ch + 1),)
-            widget.enableAutoRange(axis=pg.ViewBox.XAxis)
             grid.addWidget(widget, x, y)
-            widget.setXRange(600, 1)
-            plot = widget.plot()
-
+            plot = widget.getPlotItem()
             self.plots.append(plot)
+            plot.enableAutoRange(axis=pg.ViewBox.YAxis, enable=True)
+            plot.enableAutoRange(axis=pg.ViewBox.XAxis, enable=False)
+            view = plot.getViewBox()
+            view.setXRange(0, 600, padding=0.01)
+            view.setMouseEnabled(x=False, y=True)
+            plot.plot()
         # Setup update
         self.timer = QtCore.QTimer(self)
         self.timer.setInterval(50)
@@ -110,13 +113,14 @@ class GuiApp(QtGui.QMainWindow):
 
     @QtCore.pyqtSlot()
     def _update_plots(self):
+        dataitems = (p.listDataItems()[0] for p in self.plots)
         if self.filtering:
             n = int(self.ui.w_filter_window.value())
-            for plot, data in it.izip(self.plots, self.stream.sma(n)):
-                plot.setData(data)
+            for dataitem, data in it.izip(dataitems, self.stream.sma(n)):
+                dataitem.setData(data)
         else:
-            for plot, data in it.izip(self.plots, self.stream.data):
-                plot.setData(data)
+            for dataitem, data in it.izip(dataitems, self.stream.data):
+                dataitem.setData(data)
 
     @staticmethod
     def _serial_ports():
