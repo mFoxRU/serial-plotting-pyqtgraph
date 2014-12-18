@@ -31,6 +31,8 @@ class GuiApp(QtGui.QMainWindow):
         # Connects
         self.ui.w_connect.clicked.connect(self._try_to_connect)
         self.ui.w_filter_none.toggled.connect(self._no_filter)
+        self.ui.w_button_autozoom.toggled.connect(
+            self._autozoom_button_pressed)
         self.ui.w_button_pause.toggled.connect(self._pause_button_pressed)
         # Mix
         self.plots = []
@@ -74,6 +76,11 @@ class GuiApp(QtGui.QMainWindow):
             if self.timer is not None:
                 self.timer.start()
 
+    @QtCore.pyqtSlot(bool)
+    def _autozoom_button_pressed(self, state):
+        for plot in self.plots:
+            plot.enableAutoRange(axis=pg.ViewBox.YAxis, enable=state)
+
     def _start(self, port):
         self.ui.w_box_plotting_control.setEnabled(True)
         # Prepare for plots placing
@@ -96,12 +103,15 @@ class GuiApp(QtGui.QMainWindow):
         # Create plots
         for ch, (y, x) in coordinates:
             widget = pg.PlotWidget(self, title='Channel {}'.format(ch + 1),)
-            widget.enableAutoRange(axis=pg.ViewBox.XAxis)
             grid.addWidget(widget, x, y)
-            widget.setXRange(600, 1)
-            plot = widget.plot()
-
+            plot = widget.getPlotItem()
             self.plots.append(plot)
+            plot.enableAutoRange(axis=pg.ViewBox.YAxis, enable=True)
+            plot.enableAutoRange(axis=pg.ViewBox.XAxis, enable=False)
+            view = plot.getViewBox()
+            view.setXRange(0, 600, padding=0.01)
+            view.setMouseEnabled(x=False, y=True)
+            plot.plot()
         # Setup update
         self.timer = QtCore.QTimer(self)
         self.timer.setInterval(50)
@@ -110,13 +120,14 @@ class GuiApp(QtGui.QMainWindow):
 
     @QtCore.pyqtSlot()
     def _update_plots(self):
+        dataitems = (p.listDataItems()[0] for p in self.plots)
         if self.filtering:
             n = int(self.ui.w_filter_window.value())
-            for plot, data in it.izip(self.plots, self.stream.sma(n)):
-                plot.setData(data)
+            for dataitem, data in it.izip(dataitems, self.stream.sma(n)):
+                dataitem.setData(data)
         else:
-            for plot, data in it.izip(self.plots, self.stream.data):
-                plot.setData(data)
+            for dataitem, data in it.izip(dataitems, self.stream.data):
+                dataitem.setData(data)
 
     @staticmethod
     def _serial_ports():

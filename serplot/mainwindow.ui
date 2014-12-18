@@ -121,6 +121,19 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
+        <widget class="QPushButton" name="w_button_autozoom">
+         <property name="text">
+          <string>Auto zoom</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="w_button_pause">
          <property name="enabled">
           <bool>true</bool>
