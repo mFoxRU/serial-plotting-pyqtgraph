@@ -31,6 +31,8 @@ class GuiApp(QtGui.QMainWindow):
         # Connects
         self.ui.w_connect.clicked.connect(self._try_to_connect)
         self.ui.w_filter_none.toggled.connect(self._no_filter)
+        self.ui.w_button_autozoom.toggled.connect(
+            self._autozoom_button_pressed)
         self.ui.w_button_pause.toggled.connect(self._pause_button_pressed)
         # Mix
         self.plots = []
@@ -73,6 +75,11 @@ class GuiApp(QtGui.QMainWindow):
             self.ui.w_button_pause.setText('Pause')
             if self.timer is not None:
                 self.timer.start()
+
+    @QtCore.pyqtSlot(bool)
+    def _autozoom_button_pressed(self, state):
+        for plot in self.plots:
+            plot.enableAutoRange(axis=pg.ViewBox.YAxis, enable=state)
 
     def _start(self, port):
         self.ui.w_box_plotting_control.setEnabled(True)

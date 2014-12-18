@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Wed Dec 17 20:57:18 2014
+# Created: Thu Dec 18 06:36:16 2014
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -85,6 +85,11 @@ class Ui_MainWindow(object):
         self.w_box_plotting_control.setObjectName(_fromUtf8("w_box_plotting_control"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.w_box_plotting_control)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.w_button_autozoom = QtGui.QPushButton(self.w_box_plotting_control)
+        self.w_button_autozoom.setCheckable(True)
+        self.w_button_autozoom.setChecked(True)
+        self.w_button_autozoom.setObjectName(_fromUtf8("w_button_autozoom"))
+        self.horizontalLayout_2.addWidget(self.w_button_autozoom)
         self.w_button_pause = QtGui.QPushButton(self.w_box_plotting_control)
         self.w_button_pause.setEnabled(True)
         self.w_button_pause.setCheckable(True)
@@ -112,5 +117,6 @@ class Ui_MainWindow(object):
         self.w_filter_sma.setText(_translate("MainWindow", "SMA", None))
         self.w_filter_window.setPrefix(_translate("MainWindow", "n=", None))
         self.w_box_plotting_control.setTitle(_translate("MainWindow", "Plotting", None))
+        self.w_button_autozoom.setText(_translate("MainWindow", "Auto zoom", None))
         self.w_button_pause.setText(_translate("MainWindow", "Pause", None))
 
