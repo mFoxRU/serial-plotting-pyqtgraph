@@ -8,10 +8,8 @@ except ImportError:
     from cx_Freeze import setup, Executable
 
 # Dependencies are automatically detected, but it might need fine tuning.
-files = [('C:\\Python\\2.7\\Lib\\site-packages\\scipy\\special\\_ufuncs.pyd', '_ufuncs.pyd'),
-         ('C:\\Python\\2.7\\Lib\\site-packages\\scipy\\special\\_ufuncs_cxx.pyd', '_ufuncs_cxx.pyd')]
 build_exe_options = {"packages": ['scipy', 'scipy.special._ufuncs_cxx', 'scipy.special._ufuncs', 'numpy', 'pyqtgraph', 'PyQt4'],
-                     "include_files": files}
+                     }
 
 # GUI applications require a different base on Windows (the default is for a
 # console application).
