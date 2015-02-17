@@ -17,8 +17,13 @@ from newserialstreamer import NewSerialStreamer
 
 
 class GuiApp(QtGui.QMainWindow):
+    title_template = '<font color="{}">Channel {}</font>'
     protocols = {'Serial Protocol 1': SerialStreamer,
                  'Serial Protocol 2': NewSerialStreamer}
+    title_colors = {None:   '#000000',
+                    0:      '#FF0000',
+                    1:      '#00FF00'}
+
 
     def __init__(self, parent=None):
         QtGui.QMainWindow.__init__(self, parent)
@@ -109,7 +114,8 @@ class GuiApp(QtGui.QMainWindow):
         self.stream.start()
         # Create plots
         for ch, (y, x) in coordinates:
-            widget = pg.PlotWidget(self, title='Channel {}'.format(ch + 1),)
+            widget = pg.PlotWidget(self, title=self.title_template.format(
+                '#000000', ch + 1),)
             grid.addWidget(widget, x, y)
             plot = widget.getPlotItem()
             self.plots.append(plot)
@@ -127,14 +133,21 @@ class GuiApp(QtGui.QMainWindow):
 
     @QtCore.pyqtSlot()
     def _update_plots(self):
-        dataitems = (p.listDataItems()[0] for p in self.plots)
+        n = int(self.ui.w_filter_window.value())
         if self.filtering:
-            n = int(self.ui.w_filter_window.value())
-            for dataitem, data in it.izip(dataitems, self.stream.sma(n)):
-                dataitem.setData(data)
+            stream = self.stream.sma(n)
         else:
-            for dataitem, data in it.izip(dataitems, self.stream.data):
-                dataitem.setData(data)
+            stream = self.stream.data
+
+        # Update data
+        for plot, data in it.izip(self.plots, stream):
+            dataitem = plot.listDataItems()[0]
+            dataitem.setData(data)
+
+        # Update plot titles
+        for ch, (pl, st) in enumerate(it.izip(self.plots, self.stream.state)):
+            pl.setTitle(
+                self.title_template.format(self.title_colors[st], ch + 1))
 
     @staticmethod
     def _serial_ports():
