@@ -10,6 +10,7 @@ class LimData(object):
     def __init__(self, lim, dtype=float):
         self.limit = lim
         self.counter = 0
+        self.state = None
         self._data = np.zeros(self.limit, dtype=dtype)
 
     def add(self, new_data):
@@ -45,11 +46,16 @@ class AbstractStreamer(object):
     @property
     def data(self):
         with self._locker:
-            return [d.data for d in self._data]
+            return (d.data for d in self._data)
 
     def sma(self, n):
         with self._locker:
-            return [d.sma(n) for d in self._data]
+            return (d.sma(n) for d in self._data)
+
+    @property
+    def state(self):
+        with self._locker:
+            return (d.state for d in self._data)
 
     def add_data(self, data):
         with self._locker:
@@ -62,5 +68,3 @@ class AbstractStreamer(object):
     @abc.abstractmethod
     def _loop(self, *args, **kwargs):
         pass
-
-
