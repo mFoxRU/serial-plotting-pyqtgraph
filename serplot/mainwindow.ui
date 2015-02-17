@@ -31,6 +31,35 @@
         <widget class="QComboBox" name="w_port"/>
        </item>
        <item>
+        <widget class="QComboBox" name="w_protocol">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>200</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <item>
+          <property name="text">
+           <string>Serial Protocol 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Serial Protocol 2</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
         <widget class="QSpinBox" name="w_channels">
          <property name="suffix">
           <string> channel(s)</string>

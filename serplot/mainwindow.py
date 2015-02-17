@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Thu Dec 18 06:36:16 2014
+# Created: Tue Feb 17 04:39:51 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,6 +43,18 @@ class Ui_MainWindow(object):
         self.w_port = QtGui.QComboBox(self.w_box_source)
         self.w_port.setObjectName(_fromUtf8("w_port"))
         self.horizontalLayout_3.addWidget(self.w_port)
+        self.w_protocol = QtGui.QComboBox(self.w_box_source)
+        self.w_protocol.setEnabled(True)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(200)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.w_protocol.sizePolicy().hasHeightForWidth())
+        self.w_protocol.setSizePolicy(sizePolicy)
+        self.w_protocol.setFrame(True)
+        self.w_protocol.setObjectName(_fromUtf8("w_protocol"))
+        self.w_protocol.addItem(_fromUtf8(""))
+        self.w_protocol.addItem(_fromUtf8(""))
+        self.horizontalLayout_3.addWidget(self.w_protocol)
         self.w_channels = QtGui.QSpinBox(self.w_box_source)
         self.w_channels.setPrefix(_fromUtf8(""))
         self.w_channels.setMinimum(1)
@@ -105,11 +117,14 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
+        self.w_protocol.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Serial Plotting", None))
         self.w_box_source.setTitle(_translate("MainWindow", "Source", None))
+        self.w_protocol.setItemText(0, _translate("MainWindow", "Serial Protocol 1", None))
+        self.w_protocol.setItemText(1, _translate("MainWindow", "Serial Protocol 2", None))
         self.w_channels.setSuffix(_translate("MainWindow", " channel(s)", None))
         self.w_connect.setText(_translate("MainWindow", "Connect", None))
         self.w_box_filtering.setTitle(_translate("MainWindow", "Filtering", None))
