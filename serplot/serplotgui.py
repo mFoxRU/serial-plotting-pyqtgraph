@@ -13,9 +13,13 @@ pg.setConfigOption('foreground', 'k')
 from mainwindow import Ui_MainWindow
 from fakestreamer import FakeStreamer
 from serialstreamer import SerialStreamer
+from newserialstreamer import NewSerialStreamer
 
 
 class GuiApp(QtGui.QMainWindow):
+    protocols = {'Serial Protocol 1': SerialStreamer,
+                 'Serial Protocol 2': NewSerialStreamer}
+
     def __init__(self, parent=None):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
@@ -36,9 +40,12 @@ class GuiApp(QtGui.QMainWindow):
         self.ui.w_button_pause.toggled.connect(self._pause_button_pressed)
         # Mix
         self.plots = []
+
+    def hide_release(self):
         # For special release
         self.ui.w_channels.setValue(6)
         self.ui.w_channels.setVisible(False)
+        self.ui.w_protocol.setVisible(False)
 
     def _try_to_connect(self):
         port = str(self.ui.w_port.currentText())
@@ -97,7 +104,7 @@ class GuiApp(QtGui.QMainWindow):
         if port is None:
             cls = FakeStreamer
         else:
-            cls = SerialStreamer
+            cls = self.protocols[str(self.ui.w_protocol.currentText())]
         self.stream = cls(channels=channels, lim=600, port=port)
         self.stream.start()
         # Create plots
@@ -150,6 +157,8 @@ def main(argv=None):
         argv = sys.argv
     app = QtGui.QApplication(argv)
     gui = GuiApp()
+    if not 'godmode' in argv:
+        gui.hide_release()
     gui.show()
     app.exec_()
 
