@@ -40,7 +40,7 @@ class SerialStreamer(AbstractStreamer):
         raw = ''
         while 1:
             raw += self._read_port()
-            while len(raw) >= 4 + self._lim * 2:
+            while len(raw) >= 4 + self._channels * 2:
                 if raw.startswith(self._start_bytes):
                     info_string = raw[4:4 + self._channels * 2]
                     info_bytes = [
